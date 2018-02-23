@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using FulcrumCalc.ViewModels;
 namespace FulcrumCalc
 {
     /// <summary>
@@ -20,9 +20,28 @@ namespace FulcrumCalc
     /// </summary>
     public partial class MainWindow : Window
     {
+        CalcViewModel cvm;
+
         public MainWindow()
         {
             InitializeComponent();
+            cvm = (CalcViewModel)DataContext;
+            
+        }
+        void SetViewModel(string Context)
+        {
+            cvm.UpdateNumber = double.Parse(Context.ToString());
+        }
+
+
+        private void Btn7_Click(object sender, RoutedEventArgs e)
+        {
+            SetViewModel(Btn7.Content.ToString());
+        }
+
+        private void Plus_Click(object sender, RoutedEventArgs e)
+        {
+            cvm.Add();
         }
     }
 }

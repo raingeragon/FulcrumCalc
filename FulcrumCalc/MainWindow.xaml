@@ -3,28 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FulcrumCalc"
+        xmlns:local="clr-namespace:FulcrumCalc.ViewModels"
         mc:Ignorable="d"
         Title="Calculator" Height="490" Width="350">
+    <Window.DataContext>
+        <local:CalcViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Style x:Name="BtnDay" TargetType="Button">
-            <Setter Property="Template">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="MinHeight" Value="50"/>
+            <Setter Property="MinWidth" Value="50"/>
+            <!--<Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" ClipToBounds="True">
-                            <!-- Outer Rectangle with rounded corners. -->
+                            --><!-- Outer Rectangle with rounded corners. --><!--
                             <Rectangle x:Name="outerRectangle" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Stroke="{TemplateBinding Background}" RadiusX="20" RadiusY="20" StrokeThickness="1" Fill="Transparent" />
-                            <!--Present Content (text) of the button.--> 
+                            --><!--Present Content (text) of the button.--><!-- 
                             <DockPanel Name="myContentPresenterDockPanel">
                                 <ContentPresenter x:Name="myContentPresenter" Margin="20" Content="{TemplateBinding  Content}" TextBlock.Foreground="Black" />
                             </DockPanel>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
-            </Setter>
+            </Setter>-->
         </Style>
     </Window.Resources>
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -41,37 +47,34 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="0" BorderThickness="5" Margin="5" FlowDirection="RightToLeft" UseLayoutRounding="False" FontWeight="SemiBold">
-            <TextBox.Effect>
-                <DropShadowEffect/>
-            </TextBox.Effect>
+        <TextBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" Grid.RowSpan="2" Text="{Binding UpdateNumber}" BorderThickness="5" Margin="5" FlowDirection="RightToLeft" FontWeight="SemiBold" FontSize="50" Padding="5 50 0 0">
         </TextBox>
-        <Button Content="Back" Margin="3" Grid.Column="0" Grid.Row="2" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="CE" Margin="3" Grid.Column="1" Grid.Row="2" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="C" Margin="3" Grid.Column="2" Grid.Row="2" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="+-" Margin="3" Grid.Column="3" Grid.Row="2" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="sqrt" Margin="3" Grid.Column="4" Grid.Row="2" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        
-        <Button Content="7" Margin="3" Grid.Column="0" Grid.Row="3" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="8" Margin="3" Grid.Column="1" Grid.Row="3" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="9" Margin="3" Grid.Column="2" Grid.Row="3" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="/" Margin="3" Grid.Column="3" Grid.Row="3" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="%" Margin="3" Grid.Column="4" Grid.Row="3" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
+        <Button x:Name="Back" Content="&#8592;" Margin="3" Grid.Column="0" Grid.Row="2"/>
+        <Button x:Name="Ce" Content="CE" Margin="3" Grid.Column="1" Grid.Row="2"/>
+        <Button x:Name="C" Content="C" Margin="3" Grid.Column="2" Grid.Row="2"/>
+        <Button x:Name="PlusMinus" Content="&#177;" Margin="3" Grid.Column="3" Grid.Row="2"/>
+        <Button x:Name="Sqrt" Content="&#8730;" Margin="3" Grid.Column="4" Grid.Row="2"/>
 
-        <Button Content="4" Margin="3" Grid.Column="0" Grid.Row="4" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="5" Margin="3" Grid.Column="1" Grid.Row="4" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="6" Margin="3" Grid.Column="2" Grid.Row="4" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="*" Margin="3" Grid.Column="3" Grid.Row="4" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="1/x" Margin="3" Grid.Column="4" Grid.Row="4" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
+        <Button x:Name="Btn7" Content="7" Margin="3" Grid.Column="0" Grid.Row="3" Click="Btn7_Click" />
+        <Button x:Name="Btn8" Content="8" Margin="3" Grid.Column="1" Grid.Row="3" />
+        <Button x:Name="Btn9" Content="9" Margin="3" Grid.Column="2" Grid.Row="3" />
+        <Button x:Name="Divide" Content="/" Margin="3" Grid.Column="3" Grid.Row="3" />
+        <Button x:Name="Percent" Content="%" Margin="3" Grid.Column="4" Grid.Row="3"/>
 
-        <Button Content="1" Margin="3" Grid.Column="0" Grid.Row="5" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="2" Margin="3" Grid.Column="1" Grid.Row="5" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="3" Margin="3" Grid.Column="2" Grid.Row="5" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="-" Margin="3" Grid.Column="3" Grid.Row="5" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="=" Margin="3" Grid.Column="4" Grid.Row="5" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True" Grid.RowSpan="2"/>
-        
-        <Button Content="0" Margin="3" Grid.Column="0" Grid.Row="6" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True" Grid.ColumnSpan="2"/>
-        <Button Content="," Margin="3" Grid.Column="2" Grid.Row="6" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
-        <Button Content="+" Margin="3" Grid.Column="3" Grid.Row="6" MinWidth="50" MinHeight="50" Grid.IsSharedSizeScope="True"/>
+        <Button x:Name="Btn4" Content="4" Margin="3" Grid.Column="0" Grid.Row="4"/>
+        <Button x:Name="Btn5" Content="5" Margin="3" Grid.Column="1" Grid.Row="4" />
+        <Button x:Name="Btn6" Content="6" Margin="3" Grid.Column="2" Grid.Row="4"/>
+        <Button x:Name="Multiply" Content="*" Margin="3" Grid.Column="3" Grid.Row="4"/>
+        <Button x:Name="Inverse" Content="1/x" Margin="3" Grid.Column="4" Grid.Row="4"/>
+
+        <Button x:Name="Btn1" Content="1" Margin="3" Grid.Column="0" Grid.Row="5"/>
+        <Button x:Name="Btn2" Content="2" Margin="3" Grid.Column="1" Grid.Row="5"/>
+        <Button x:Name="Btn3" Content="3" Margin="3" Grid.Column="2" Grid.Row="5"/>
+        <Button x:Name="Minus" Content="-" Margin="3" Grid.Column="3" Grid.Row="5"/>
+        <Button x:Name="Equal" Content="=" Margin="3" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2"/>
+
+        <Button x:Name="Btn0" Content="0" Margin="3" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2"/>
+        <Button x:Name="Comma" Content="," Margin="3" Grid.Column="2" Grid.Row="6"/>
+        <Button x:Name="Plus" Content="+" Margin="3" Grid.Column="3" Grid.Row="6" Click="Plus_Click"/>
     </Grid>
 </Window>
