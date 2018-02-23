@@ -11,13 +11,14 @@ namespace FulcrumCalc.Models
         private double Result;
 
         public double Number
-        { get
+        {
+            get
             {
                 return Result;
             }
             set
             {
-                Number = Result;
+                Result = value;
             }
         }
 
@@ -26,9 +27,20 @@ namespace FulcrumCalc.Models
             Result = 0;
         }
 
-        public double Add(double x, double y)
-        {
-            return x + y;
-        }
+        public double Add(double x, double y) => x + y;
+
+        public double Subtract(double x, double y) => x - y;
+
+        public double Multiply(double x, double y) => x * y;
+
+        public double Divide(double x, double y) => x / y;
+
+        public double Sqrt(double x) => Math.Sqrt(x);
+
+        public double Inverse(double x) => 1.0 / x;
+
+        public double Opposite(double x) => -x;
+
+        public double PlusPercent(double x, double y) => x + x * y / 100.0;
     }
 }
