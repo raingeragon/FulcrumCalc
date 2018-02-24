@@ -100,7 +100,6 @@ namespace FulcrumCalc.ViewModels
 
         public void Opposite()
         {
-
             double res = model.Opposite(UpdateNumber);
             Clear();
             UpdateNumber = res;
@@ -110,8 +109,7 @@ namespace FulcrumCalc.ViewModels
         }
 
         public void Inverse()
-        {
-
+        { 
             double res = model.Inverse(UpdateNumber);
             Clear();
             UpdateNumber = res;

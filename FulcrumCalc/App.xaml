@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:FulcrumCalc"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <local:SkinResourceDictionary LightTheme="LightTheme.xaml" />
+                <local:SkinResourceDictionary DarkTheme="DarkTheme.xaml"/>
+                <ResourceDictionary Source="ThemeStyle.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

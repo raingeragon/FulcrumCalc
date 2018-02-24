@@ -11,7 +11,24 @@ namespace FulcrumCalc
     /// <summary>
     /// Логика взаимодействия для App.xaml
     /// </summary>
+    public enum Skin
+    {
+        Light,
+        Dark
+    }
     public partial class App : Application
     {
+        public static Skin Skin { get; set; } = Skin.Light;
+        public void ChangeSkin(Skin newSkin)
+        {
+            Skin = newSkin;
+            foreach(ResourceDictionary dict in Resources.MergedDictionaries)
+            {
+                if (dict is SkinResourceDictionary skinDict)
+                    skinDict.UpdateSource();
+                else
+                    dict.Source = dict.Source;
+            }
+        }
     }
 }

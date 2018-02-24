@@ -23,9 +23,11 @@ namespace FulcrumCalc
         {
             InitializeComponent();
             cvm = (CalcViewModel)DataContext;
+            //CalcBox.Style = 
             
         }
         void SetViewModel(string Context) => cvm.UpdateNumber = double.Parse(Context.ToString());
+
         private void Btn0_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn0.Content.ToString());
         private void Btn1_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn1.Content.ToString());
         private void Btn2_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn2.Content.ToString());
@@ -36,8 +38,6 @@ namespace FulcrumCalc
         private void Btn7_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn7.Content.ToString());
         private void Btn8_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn8.Content.ToString());
         private void Btn9_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn9.Content.ToString());
-
-
 
         private void Plus_Click(object sender, RoutedEventArgs e) => cvm.Add();
         private void Subtract_Click(object sender, RoutedEventArgs e) => cvm.Subtract();
@@ -50,5 +50,21 @@ namespace FulcrumCalc
         private void ClearAll_Click(object sender, RoutedEventArgs e) => cvm.ClearAll();
         private void Equal_Click(object sender, RoutedEventArgs e) => cvm.Equal();
         private void Opposite_Click(object sender, RoutedEventArgs e) => cvm.Opposite();
+
+        private void Theme_Checked(object sender, RoutedEventArgs e)
+        {
+            (App.Current as App).ChangeSkin(Skin.Dark);
+            RefreshGrid();
+        }
+
+        private void Theme_Unchecked(object sender, RoutedEventArgs e)
+        {
+            (App.Current as App).ChangeSkin(Skin.Light);
+            RefreshGrid();
+        }
+        private void RefreshGrid()
+        {
+            
+        }
     }
 }
