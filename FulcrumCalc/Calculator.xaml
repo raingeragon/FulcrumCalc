@@ -1,23 +1,12 @@
-﻿<Window x:Class="FulcrumCalc.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:FulcrumCalc.ViewModels"
-        xmlns:local="clr-namespace:FulcrumCalc"
-        mc:Ignorable="d"
-        Title="Calculator" Height="490" Width="350" MinWidth="300">
-    <Window.DataContext>
-        <vm:CalcViewModel/>
-    </Window.DataContext>
-    <StackPanel x:Name="MyStackPanel">
-        <CheckBox Content="Theme" Checked="Theme_Checked" Unchecked="Theme_Unchecked"/>
-        <Border x:Name="NiceSquareContainer" Margin="30">
-            <local:NiceSquare/>
-        </Border>
-    </StackPanel>
-    <!--<Grid ShowGridLines="False" x:Name="CalcBox">
-        
+﻿<UserControl x:Class="FulcrumCalc.Calculator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FulcrumCalc"
+             mc:Ignorable="d">
+    <Grid ShowGridLines="False" x:Name="CalcBox">
+
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -35,7 +24,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="3" Grid.Row="0"
+        <!--<CheckBox Grid.Column="3" Grid.Row="0"
                   Grid.ColumnSpan="2" 
                   Content="Dark Theme"
                   FontSize="20"
@@ -44,8 +33,8 @@
                   Checked="Theme_Checked"
                   
                   >
-        </CheckBox>
-        
+        </CheckBox>-->
+
         <TextBox Grid.Column="0" Grid.Row="0"
                  Grid.ColumnSpan="5" Grid.RowSpan="2"
                  Text="{Binding UpdateNumber}"
@@ -55,7 +44,7 @@
                  FontWeight="SemiBold" FontSize="50"
                  Padding="5 25 0 0" VerticalAlignment="Stretch">
         </TextBox>
-        
+
         <Button x:Name="Back" Content="&#8592;" Grid.Column="0" Grid.Row="2" />
         <Button x:Name="Clear" Content="CE" Grid.Column="1" Grid.Row="2"  Click="Clear_Click"/>
         <Button x:Name="ClearAll" Content="C" Grid.Column="2" Grid.Row="2" Click="ClearAll_Click"/>
@@ -83,5 +72,5 @@
         <Button x:Name="Btn0" Content="0" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="Btn0_Click"/>
         <Button x:Name="Comma" Content="," Grid.Column="2" Grid.Row="6" />
         <Button x:Name="Plus" Content="+" Grid.Column="3" Grid.Row="6" Click="Plus_Click"/>
-    </Grid>-->
-</Window>
+    </Grid>
+</UserControl>

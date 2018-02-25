@@ -54,13 +54,13 @@ namespace FulcrumCalc
         private void Theme_Checked(object sender, RoutedEventArgs e)
         {
             (App.Current as App).ChangeSkin(Skin.Dark);
-            RefreshGrid();
+            RefreshNiceSquare();
         }
 
         private void Theme_Unchecked(object sender, RoutedEventArgs e)
         {
             (App.Current as App).ChangeSkin(Skin.Light);
-            RefreshGrid();
+            RefreshNiceSquare();
         }
         private void RefreshGrid()
         {

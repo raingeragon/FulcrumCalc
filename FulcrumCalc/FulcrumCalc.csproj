@@ -54,11 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="LightColors.xaml">
+    <Page Include="Themes\Light\LightColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LightSizes.xaml">
+    <Page Include="Themes\Light\LightSizes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -84,11 +84,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DarkColors.xaml">
+    <Page Include="Themes\Dark\DarkColors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DarkSizes.xaml">
+    <Page Include="Themes\Dark\DarkSizes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,8 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resourses\" />
-    <Folder Include="Themes\Dark\" />
-    <Folder Include="Themes\Light\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
