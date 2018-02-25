@@ -6,10 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <local:SkinResourceDictionary LightTheme="LightTheme.xaml" />
-                <local:SkinResourceDictionary DarkTheme="DarkTheme.xaml"/>
+                <local:SkinResourceDictionary DarkSource="DarkColors.xaml" 
+                                              LightSource="LightColors.xaml" />
+                <local:SkinResourceDictionary DarkSource="DarkSizes.xaml" 
+                                              LightSource="LightSizes.xaml" />
                 <ResourceDictionary Source="ThemeStyle.xaml"/>
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

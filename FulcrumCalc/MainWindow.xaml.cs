@@ -28,16 +28,16 @@ namespace FulcrumCalc
         }
         void SetViewModel(string Context) => cvm.UpdateNumber = double.Parse(Context.ToString());
 
-        private void Btn0_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn0.Content.ToString());
-        private void Btn1_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn1.Content.ToString());
-        private void Btn2_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn2.Content.ToString());
-        private void Btn3_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn3.Content.ToString());
-        private void Btn4_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn4.Content.ToString());
-        private void Btn5_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn5.Content.ToString());
-        private void Btn6_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn6.Content.ToString());
-        private void Btn7_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn7.Content.ToString());
-        private void Btn8_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn8.Content.ToString());
-        private void Btn9_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn9.Content.ToString());
+        //private void Btn0_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn0.Content.ToString());
+        //private void Btn1_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn1.Content.ToString());
+        //private void Btn2_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn2.Content.ToString());
+        //private void Btn3_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn3.Content.ToString());
+        //private void Btn4_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn4.Content.ToString());
+        //private void Btn5_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn5.Content.ToString());
+        //private void Btn6_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn6.Content.ToString());
+        //private void Btn7_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn7.Content.ToString());
+        //private void Btn8_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn8.Content.ToString());
+        //private void Btn9_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn9.Content.ToString());
 
         private void Plus_Click(object sender, RoutedEventArgs e) => cvm.Add();
         private void Subtract_Click(object sender, RoutedEventArgs e) => cvm.Subtract();
@@ -65,6 +65,22 @@ namespace FulcrumCalc
         private void RefreshGrid()
         {
             
+        }
+
+        private void OnBlueClick(object sender, RoutedEventArgs e)
+        {
+            (App.Current as App).ChangeSkin(Skin.Light);
+            RefreshNiceSquare();
+        }
+
+        private void OnRedClick(object sender, RoutedEventArgs e)
+        {
+            (App.Current as App).ChangeSkin(Skin.Dark);
+            RefreshNiceSquare();
+        }
+        private void RefreshNiceSquare()
+        {
+            NiceSquareContainer.Child = new NiceSquare();
         }
     }
 }

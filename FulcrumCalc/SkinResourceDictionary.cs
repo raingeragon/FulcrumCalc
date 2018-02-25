@@ -9,40 +9,33 @@ namespace FulcrumCalc
 {
     public class SkinResourceDictionary : ResourceDictionary
     {
-        private Uri _lightTheme;
-        private Uri _darkTheme;
+        private Uri _darkSource;
+        private Uri _lightSource;
 
-        public Uri LightTheme
+        public Uri DarkSource
         {
-            get
-            {
-                return _lightTheme;
-            }
+            get { return _darkSource; }
             set
             {
-                _lightTheme = value;
+                _darkSource = value;
                 UpdateSource();
             }
         }
-
-        public Uri DarkTheme
+        public Uri LightSource
         {
-            get
-            {
-                return _darkTheme;
-            }
+            get { return _lightSource; }
             set
             {
-                _darkTheme = value;
+                _lightSource = value;
                 UpdateSource();
             }
         }
 
         public void UpdateSource()
         {
-            var val = App.Skin == Skin.Light ? LightTheme : DarkTheme;
-            if (val != null && Source != val)
-                Source = val;
+            var val = App.Skin == Skin.Dark ? DarkSource : LightSource;
+            if (val != null && base.Source != val)
+                base.Source = val;
         }
     }
 

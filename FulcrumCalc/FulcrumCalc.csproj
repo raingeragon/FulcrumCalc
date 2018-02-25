@@ -54,6 +54,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="LightColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LightSizes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,17 +71,24 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\CalcModel.cs" />
+    <Compile Include="NiceSquare.xaml.cs">
+      <DependentUpon>NiceSquare.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SkinResourceDictionary.cs" />
     <Compile Include="ViewModels\CalcViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DarkTheme.xaml">
+    <Page Include="NiceSquare.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LightTheme.xaml">
+    <Page Include="DarkColors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DarkSizes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,6 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resourses\" />
+    <Folder Include="Themes\Dark\" />
+    <Folder Include="Themes\Light\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
