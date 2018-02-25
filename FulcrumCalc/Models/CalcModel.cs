@@ -42,5 +42,10 @@ namespace FulcrumCalc.Models
         public double Opposite(double x) => -x;
 
         public double PlusPercent(double x, double y) => x + x * y / 100.0;
+
+        public double Back(double x)
+        {
+            return (int)x / 10;
+        }
     }
 }

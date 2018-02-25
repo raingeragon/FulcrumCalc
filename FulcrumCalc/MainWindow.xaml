@@ -6,17 +6,17 @@
         xmlns:vm="clr-namespace:FulcrumCalc.ViewModels"
         xmlns:local="clr-namespace:FulcrumCalc"
         mc:Ignorable="d"
-        Title="Calculator" Height="490" Width="350" MinWidth="300">
+        Title="Calculator" Height="490" Width="350" MinWidth="300" KeyDown="Input_KeyDown">
     <Window.DataContext>
         <vm:CalcViewModel/>
     </Window.DataContext>
-    <StackPanel x:Name="MyStackPanel">
+    <!--<StackPanel x:Name="MyStackPanel">
         <CheckBox Content="Theme" Checked="Theme_Checked" Unchecked="Theme_Unchecked"/>
         <Border x:Name="NiceSquareContainer" Margin="30">
             <local:NiceSquare/>
         </Border>
-    </StackPanel>
-    <!--<Grid ShowGridLines="False" x:Name="CalcBox">
+    </StackPanel>-->
+    <Grid ShowGridLines="False" x:Name="CalcBox">
         
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -35,7 +35,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="3" Grid.Row="0"
+        <!--<CheckBox Grid.Column="3" Grid.Row="0"
                   Grid.ColumnSpan="2" 
                   Content="Dark Theme"
                   FontSize="20"
@@ -44,9 +44,10 @@
                   Checked="Theme_Checked"
                   
                   >
-        </CheckBox>
+        </CheckBox>-->
         
-        <TextBox Grid.Column="0" Grid.Row="0"
+        <TextBox x:Name="InputField"
+                 Grid.Column="0" Grid.Row="0"
                  Grid.ColumnSpan="5" Grid.RowSpan="2"
                  Text="{Binding UpdateNumber}"
                  BorderThickness="5"
@@ -56,7 +57,7 @@
                  Padding="5 25 0 0" VerticalAlignment="Stretch">
         </TextBox>
         
-        <Button x:Name="Back" Content="&#8592;" Grid.Column="0" Grid.Row="2" />
+        <Button x:Name="Back" Content="&#8592;" Grid.Column="0" Grid.Row="2" Click="Back_Click"/>
         <Button x:Name="Clear" Content="CE" Grid.Column="1" Grid.Row="2"  Click="Clear_Click"/>
         <Button x:Name="ClearAll" Content="C" Grid.Column="2" Grid.Row="2" Click="ClearAll_Click"/>
         <Button x:Name="Opposite" Content="&#177;" Grid.Column="3" Grid.Row="2" Click="Opposite_Click"/>
@@ -65,7 +66,7 @@
         <Button x:Name="Btn7" Content="7" Grid.Column="0" Grid.Row="3" Click="Btn7_Click" />
         <Button x:Name="Btn8" Content="8" Grid.Column="1" Grid.Row="3" Click="Btn8_Click"/>
         <Button x:Name="Btn9" Content="9" Grid.Column="2" Grid.Row="3" Click="Btn9_Click"/>
-        <Button x:Name="Divide" Content="/" Grid.Column="3" Grid.Row="3" Click="Divide_CLick"/>
+        <Button x:Name="Divide" Content="/" Grid.Column="3" Grid.Row="3" Click="Divide_Click"/>
         <Button x:Name="PlusPercent" Content="%" Grid.Column="4" Grid.Row="3" Click="PlusPercent_Click"/>
 
         <Button x:Name="Btn4" Content="4" Grid.Column="0" Grid.Row="4" Click="Btn4_Click"/>
@@ -78,10 +79,10 @@
         <Button x:Name="Btn2" Content="2" Grid.Column="1" Grid.Row="5" Click="Btn2_Click"/>
         <Button x:Name="Btn3" Content="3" Grid.Column="2" Grid.Row="5" Click="Btn3_Click"/>
         <Button x:Name="Minus" Content="-" Grid.Column="3" Grid.Row="5" Click="Subtract_Click"/>
-        <Button x:Name="Equal" Content="=" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Click="Equal_Click"/>
+        <Button x:Name="Equal" Content="=" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Click="Equal_Click" IsDefault="True"/>
 
         <Button x:Name="Btn0" Content="0" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="Btn0_Click"/>
-        <Button x:Name="Comma" Content="," Grid.Column="2" Grid.Row="6" />
-        <Button x:Name="Plus" Content="+" Grid.Column="3" Grid.Row="6" Click="Plus_Click"/>
-    </Grid>-->
+        <Button x:Name="Comma" Content="," Grid.Column="2" Grid.Row="6" Click="Comma_Click"/>
+        <Button x:Name="Add" Content="+" Grid.Column="3" Grid.Row="6" Click="Add_Click"/>
+    </Grid>
 </Window>

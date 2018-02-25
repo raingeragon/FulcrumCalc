@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:FulcrumCalc"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Border Width="100" Height="100" Style="{StaticResource ThemeStyle}"/>
+    <Border Width="100"  Style="{StaticResource ThemeStyle}"/>
 </UserControl>

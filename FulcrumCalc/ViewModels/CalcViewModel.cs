@@ -35,7 +35,12 @@ namespace FulcrumCalc.ViewModels
                 RaisePropertyChanged("UpdateNumber");
             }
         }
-
+        public void Back()
+        {
+            double res = model.Back(UpdateNumber);
+            Clear();
+            UpdateNumber = res;
+        }
         public void Add()
         {
             if (lastoperation == LastOperation.Add)
