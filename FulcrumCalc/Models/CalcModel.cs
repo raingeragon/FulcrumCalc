@@ -8,9 +8,9 @@ namespace FulcrumCalc.Models
 {
     class CalcModel
     {
-        private double Result;
+        private string Result;
 
-        public double Number
+        public string Number
         {
             get
             {
@@ -24,7 +24,7 @@ namespace FulcrumCalc.Models
 
         public CalcModel()
         {
-            Result = 0;
+            Result = "0";
         }
 
         public double Add(double x, double y) => x + y;

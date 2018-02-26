@@ -26,18 +26,12 @@ namespace FulcrumCalc
             cvm = (CalcViewModel)DataContext;
 
         }
-        void SetViewModel(string Context) => cvm.UpdateNumber = double.Parse(Context.ToString());
 
-        private void Btn0_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn0.Content.ToString());
-        private void Btn1_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn1.Content.ToString());
-        private void Btn2_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn2.Content.ToString());
-        private void Btn3_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn3.Content.ToString());
-        private void Btn4_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn4.Content.ToString());
-        private void Btn5_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn5.Content.ToString());
-        private void Btn6_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn6.Content.ToString());
-        private void Btn7_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn7.Content.ToString());
-        private void Btn8_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn8.Content.ToString());
-        private void Btn9_Click(object sender, RoutedEventArgs e) => SetViewModel(Btn9.Content.ToString());
+        private void NumBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var num = (Button)sender;
+            cvm.UpdateNumber = double.Parse(num.Content.ToString());
+        }
 
         private void Back_Click(object sender, RoutedEventArgs e) => cvm.Back();
         private void Add_Click(object sender, RoutedEventArgs e) => cvm.Add();
@@ -90,71 +84,70 @@ namespace FulcrumCalc
             switch (e.Key.ToString())
             {
                 case "D0":
-                    Btn0_Click(sender, e);
-                    
+                    NumBtn_Click(Btn0, e);
                     break;
                 case "Numpad0":
-                    Btn0_Click(sender, e);
+                    NumBtn_Click(Btn0, e);
                     break;
                 case "D1":
-                    Btn1_Click(sender, e);
+                    NumBtn_Click(Btn1, e);
                     break;
                 case "Numpad1":
-                    Btn1_Click(sender, e);
+                    NumBtn_Click(Btn1, e);
                     break;
                 case "D2":
-                    Btn2_Click(sender, e);
+                    NumBtn_Click(Btn2, e);
                     break;
                 case "Numpad2":
-                    Btn2_Click(sender, e);
+                    NumBtn_Click(Btn2, e);
                     break;
                 case "D3":
-                    Btn3_Click(sender, e);
+                    NumBtn_Click(Btn3, e);
                     break;
                 case "Numpad3":
-                    Btn3_Click(sender, e);
+                    NumBtn_Click(Btn3, e);
                     break;
                 case "D4":
-                    Btn4_Click(sender, e);
+                    NumBtn_Click(Btn4, e);
                     break;
                 case "Numpad4":
-                    Btn4_Click(sender, e);
+                    NumBtn_Click(Btn4, e);
                     break;
                 case "D5":
-                    Btn5_Click(sender, e);
+                    NumBtn_Click(Btn5, e);
                     break;
                 case "Numpad5":
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                         PlusPercent_Click(sender, e);
                     else
-                        Btn5_Click(sender, e);
+                        NumBtn_Click(Btn5, e);
                     break;
                 case "D6":
-                    Btn6_Click(sender, e);
+                    NumBtn_Click(Btn6, e);
                     break;
                 case "Numpad6":
-                    Btn6_Click(sender, e);
+                    NumBtn_Click(Btn6, e);
                     break;
                 case "D7":
-                    Btn7_Click(sender, e);
+                    NumBtn_Click(Btn7, e);
                     break;
                 case "Numpad7":
-                    Btn7_Click(sender, e);
+                    NumBtn_Click(Btn7, e);
                     break;
                 case "D8":
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                         Multiply_Click(sender, e);
                     else
-                        Btn8_Click(sender, e);
+                        NumBtn_Click(Btn8, e);
                     break;
                 case "Numpad8":
-                    Btn8_Click(sender, e);
+                    NumBtn_Click(Btn8, e);
                     break;
                 case "D9":
-                    Btn9_Click(sender, e);
+                    NumBtn_Click(Btn9, e);
                     break;
                 case "Numpad9":
-                    Btn9_Click(sender, e);
+                    NumBtn_Click(Btn9, e);
                     break;
                 case "Back":
                     Back_Click(sender, e);
@@ -166,7 +159,7 @@ namespace FulcrumCalc
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                         Add_Click(sender, e);
                     else
-                        Equal_Click(sender,e);
+                        Equal_Click(sender, e);
                     break;
                 case "Multiply":
                     Multiply_Click(sender, e);
@@ -182,7 +175,7 @@ namespace FulcrumCalc
                         Divide_Click(sender, e);
                     break;
                 case "Subtract":
-                        Subtract_Click(sender, e);
+                    Subtract_Click(sender, e);
                     break;
                 case "OemMinus":
                     if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
@@ -192,8 +185,8 @@ namespace FulcrumCalc
                     Comma_Click(sender, e);
                     break;
                 case "OemComma":
-                    if (!(local.CurrentInputLanguage.ToString()!="ru-Ru"))
-                    Comma_Click(sender, e);
+                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        Comma_Click(sender, e);
                     break;
                 case "OemPeriod":
                     if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))

@@ -23,17 +23,17 @@ namespace FulcrumCalc.ViewModels
         {
             get
             {
-                return model.Number;
+                return StringToDouble(model.Number);
             }
             set
             {
-                if (model.Number == 0 || newEntry)
+                if (StringToDouble(model.Number) == 0 || newEntry)
                 {
-                    model.Number = value;
+                    model.Number = value.ToString();
                     newEntry = false;
                 }
                 else
-                    model.Number = double.Parse(model.Number.ToString() + value.ToString());
+                    model.Number = model.Number.ToString() + value.ToString();
                 RaisePropertyChanged("UpdateNumber");
             }
         }
@@ -140,13 +140,13 @@ namespace FulcrumCalc.ViewModels
 
         public void Clear()
         {
-            model.Number = 0;
+            model.Number = "0";
             UpdateNumber = 0;
         }
 
         public void ClearAll()
         {
-            model.Number = 0;
+            model.Number = "0";
             UpdateNumber = 0;
             tempNumber = 0;
             newEntry = false;
@@ -192,20 +192,10 @@ namespace FulcrumCalc.ViewModels
         private double StringToDouble(string val)
         {
             double res = 0;
-            try
-            {
-                 res = Convert.ToDouble(val);
-            }
-            catch (FormatException)
-            {
-                try
-                {
-                    res = Convert.ToDouble(val.Remove(val.Length - 1));
-                }
-                catch(OverflowException)
-                { }
-            }
-            
+            if (val[val.Length - 1] == '.')
+                res = Convert.ToDouble(val.Remove(val.Length - 1));
+            else
+                res = Convert.ToDouble(val);
             return res;
             
         }
