@@ -36,12 +36,12 @@ namespace FulcrumCalc
         private void Operation_Click(object sender, RoutedEventArgs e)
         {
             var op = (Button)sender;
-            cvm.OperationSwitcher(op.Content.ToString());
+            cvm.OperationSwitcher(op.Content.ToString(), cvm);
         }
 
         private void Input_KeyDown(object sender, KeyEventArgs e)
         {
-            cvm.KeyBoardSwitcher(e.Key.ToString());
+            cvm.KeyBoardSwitcher(e.Key.ToString(), cvm);
         }
 
         private void Comma_Click(object sender, RoutedEventArgs e)

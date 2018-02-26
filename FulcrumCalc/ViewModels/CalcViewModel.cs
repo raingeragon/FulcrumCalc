@@ -24,26 +24,29 @@ namespace FulcrumCalc.ViewModels
         {
             get
             {
-                return StringToDouble(model.Number);
+                return model.Number;
             }
             set
             {
-                if (StringToDouble(model.Number) == 0 || newEntry)
+                if (model.Number == 0 || newEntry)
                 {
-                    model.Number = value.ToString();
+                    model.Number = value;
                     newEntry = false;
                 }
                 else
-                    model.Number = model.Number.ToString() + value.ToString();
+                    model.Number = double.Parse(model.Number.ToString() + value.ToString());
                 RaisePropertyChanged("UpdateNumber");
             }
         }
+
+        #region Operations
         public void Back()
         {
             double res = model.Back(UpdateNumber);
             Clear();
             UpdateNumber = res;
         }
+
         public void Add()
         {
             if (lastoperation == LastOperation.Add)
@@ -141,13 +144,13 @@ namespace FulcrumCalc.ViewModels
 
         public void Clear()
         {
-            model.Number = "0";
+            model.Number = 0;
             UpdateNumber = 0;
         }
 
         public void ClearAll()
         {
-            model.Number = "0";
+            model.Number = 0;
             UpdateNumber = 0;
             tempNumber = 0;
             newEntry = false;
@@ -181,48 +184,53 @@ namespace FulcrumCalc.ViewModels
             }
             lastoperation = LastOperation.None;
         }
+        #endregion
 
-        public void OperationSwitcher(string op)
+#region Switchers
+        public void OperationSwitcher(string op, CalcViewModel cvm)
         {
             switch(op)
             {
-                case "Add":
-                    Add();
+                case "+":
+                    cvm.Add();
                     break;
-                case "Subtract":
-                    Subtract();
+                case "-":
+                    cvm.Subtract();
                     break;
-                case "Divide":
-                    Divide();
+                case "*":
+                    cvm.Multiply();
                     break;
-                case "Sqrt":
-                    Sqrt();
+                case "/":
+                    cvm.Divide();
                     break;
-                case "Opposite":
-                    Opposite();
+                case "√":
+                    cvm.Sqrt();
                     break;
-                case "Inverse":
-                    Inverse();
+                case "±":
+                    cvm.Opposite();
                     break;
-                case "PlusPercent":
-                    PlusPercent();
+                case "1/x":
+                    cvm.Inverse();
                     break;
-                case "Clear":
-                    Clear();
+                case "%":
+                    cvm.PlusPercent();
                     break;
-                case "ClearAll":
-                    ClearAll();
+                case "CE":
+                    cvm.Clear();
                     break;
-                case "Equal":
-                    Equal();
+                case "C":
+                    cvm.ClearAll();
                     break;
-                case "Back":
-                    Back();
+                case "=":
+                    cvm.Equal();
+                    break;
+                case "←":
+                    cvm.Back();
                     break;
             }
         }
 
-        public void KeyBoardSwitcher(string key)
+        public void KeyBoardSwitcher(string key, CalcViewModel cvm)
         {
             var local = InputLanguageManager.Current;//ru-Ru
             switch (key)
@@ -262,7 +270,7 @@ namespace FulcrumCalc.ViewModels
                     break;
                 case "NumPad5":
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                        PlusPercent();
+                        cvm.PlusPercent();
                     else
                         UpdateNumber = 5;
                     break;
@@ -280,7 +288,7 @@ namespace FulcrumCalc.ViewModels
                     break;
                 case "D8":
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                        Multiply();
+                        cvm.Multiply();
                     else
                         UpdateNumber = 8;
                     break;
@@ -301,9 +309,9 @@ namespace FulcrumCalc.ViewModels
                     break;
                 case "OemPlus":
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                        Add();
+                        cvm.Add();
                     else
-                        Equal();
+                        cvm.Equal();
                     break;
                 case "Multiply":
                     Multiply();
@@ -317,14 +325,14 @@ namespace FulcrumCalc.ViewModels
                         break;
                     else
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                        Divide();
+                        cvm.Divide();
                     break;
                 case "Subtract":
-                    Subtract();
+                    cvm.Subtract();
                     break;
                 case "OemMinus":
                     if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
-                        Subtract();
+                        cvm.Subtract();
                     break;
                 case "Decimal":
                    // Comma_Click(sender, e);
@@ -339,7 +347,7 @@ namespace FulcrumCalc.ViewModels
                     break;
             }
         }
-    
+#endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
 
