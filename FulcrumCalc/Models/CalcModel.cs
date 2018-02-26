@@ -8,25 +8,6 @@ namespace FulcrumCalc.Models
 {
     class CalcModel
     {
-        private double Result;
-
-        public double Number
-        {
-            get
-            {
-                return Result;
-            }
-            set
-            {
-                Result = value;
-            }
-        }
-
-        public CalcModel()
-        {
-            Result = 0;
-        }
-
         public double Add(double x, double y) => x + y;
 
         public double Subtract(double x, double y) => x - y;
@@ -43,9 +24,11 @@ namespace FulcrumCalc.Models
 
         public double PlusPercent(double x, double y) => x + x * y / 100.0;
 
-        public double Back(double x)
+        public string Back(string x)
         {
-            return (int)x / 10;
+            if (x.Length > 1)
+            return x.Remove(x.Length - 1);
+            return "0";
         }
     }
 }

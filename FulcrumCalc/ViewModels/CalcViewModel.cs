@@ -7,158 +7,171 @@ namespace FulcrumCalc.ViewModels
 {
     class CalcViewModel : INotifyPropertyChanged
     {
-        private double tempNumber;
+        private string tempNumber;
         private CalcModel model;
         LastOperation lastoperation;
-        bool newEntry;
+        private string output;
+        public string Output
+        {
+            get
+            {
+                return output;
+            }
+            set
+            {
+                output = value;
+                RaisePropertyChanged("Output");
+            }
+        }
+            
 
         public CalcViewModel()
         {
             model = new CalcModel();
-            tempNumber = 0;
+            tempNumber = "0";
+            Output = "0";
             lastoperation = LastOperation.None;
-            newEntry = false;
         }
 
-        public double UpdateNumber
+        public void TxtUpdate(string input)
         {
-            get
+            if (input == ".")
             {
-                return model.Number;
+                if (!(Output == "0" || Output =="" || Output.Contains(".")))
+                    Output += input;
             }
-            set
-            {
-                if (model.Number == 0 || newEntry)
-                {
-                    model.Number = value;
-                    newEntry = false;
-                }
-                else
-                    model.Number = double.Parse(model.Number.ToString() + value.ToString());
-                RaisePropertyChanged("UpdateNumber");
-            }
+            else
+                if (Output == "0")
+                Output = input;
+            else
+                Output += input;
+            
         }
+
 
         #region Operations
 
-        public void Back()
+        private void Back()
         {
-            double res = model.Back(UpdateNumber);
+            string res = model.Back(Output);
             Clear();
-            UpdateNumber = res;
+            TxtUpdate(res);
         }
 
-        public void Add()
+        private void Add()
         {
             if (lastoperation == LastOperation.Add)
             {
-                double res = model.Add(UpdateNumber, tempNumber);
+                double res = model.Add(StringToDouble(tempNumber), StringToDouble(Output));
                 Clear();
-                UpdateNumber = res;
+                TxtUpdate(res.ToString());
             }
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            tempNumber = Output;
+            if (lastoperation == LastOperation.None)
+                Output = "";
             lastoperation = LastOperation.Add;
         }
 
-        public void Subtract()
+        private void Subtract()
         {
             if (lastoperation == LastOperation.Subtract)
             {
-                double res = model.Subtract(tempNumber, UpdateNumber);
+                double res = model.Subtract(StringToDouble(tempNumber), StringToDouble(Output));
                 Clear();
-                UpdateNumber = res;
+                TxtUpdate(res.ToString());
             }
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            tempNumber = Output;
+            if (lastoperation == LastOperation.None)
+                Output = "";
             lastoperation = LastOperation.Subtract;
         }
 
-        public void Multiply()
+        private void Multiply()
         {
             if (lastoperation == LastOperation.Multiply)
             {
-                double res = model.Multiply(UpdateNumber, tempNumber);
+                double res = model.Multiply(StringToDouble(tempNumber), StringToDouble(Output));
                 Clear();
-                UpdateNumber = res;
+                TxtUpdate(res.ToString());
             }
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            tempNumber = Output;
+            if (lastoperation == LastOperation.None)
+                Output = "";
             lastoperation = LastOperation.Multiply;
         }
 
-        public void Divide()
+        private void Divide()
         {
             if (lastoperation == LastOperation.Divide)
             {
-                double res = model.Divide(tempNumber, UpdateNumber);
+                double res = model.Divide(StringToDouble(tempNumber), StringToDouble(Output));
                 Clear();
-                UpdateNumber = res;
+                TxtUpdate(res.ToString());
             }
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            tempNumber = Output;
+            if (lastoperation == LastOperation.None)
+                Output = "";
             lastoperation = LastOperation.Divide;
         }
 
-        public void Sqrt()
+        private void Sqrt()
         {
-            double res = model.Sqrt(UpdateNumber);
+            if (StringToDouble(Output) >= 0)
+            {
+                double res = model.Sqrt(StringToDouble(Output));
+                Clear();
+                TxtUpdate(res.ToString());
+                tempNumber = Output;
+            }
+                lastoperation = LastOperation.None;
+            
+        }
+
+        private void Opposite()
+        {
+            double res = model.Opposite(StringToDouble(Output));
             Clear();
-            UpdateNumber = res;
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            TxtUpdate(res.ToString());
+            tempNumber = Output;
             lastoperation = LastOperation.None;
         }
 
-        public void Opposite()
-        {
-            double res = model.Opposite(UpdateNumber);
-            Clear();
-            UpdateNumber = res;
-            tempNumber = UpdateNumber;
-            newEntry = true;
-            lastoperation = LastOperation.None;
-        }
-
-        public void Inverse()
+        private void Inverse()
         { 
-            double res = model.Inverse(UpdateNumber);
+            double res = model.Inverse(StringToDouble(Output));
             Clear();
-            UpdateNumber = res;
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            TxtUpdate(res.ToString());
+            tempNumber = Output;
             lastoperation = LastOperation.None;
         }
 
-        public void PlusPercent()
+        private void PlusPercent()
         {
             if (lastoperation == LastOperation.PLusPercent)
             {
-                double res = model.PlusPercent(tempNumber, UpdateNumber);
+                double res = model.PlusPercent(StringToDouble(tempNumber), StringToDouble(Output));
                 Clear();
-                UpdateNumber = res;
+                TxtUpdate(res.ToString());
             }
-            tempNumber = UpdateNumber;
-            newEntry = true;
+            tempNumber = Output;
+            if (lastoperation == LastOperation.None)
+                Output = "";
             lastoperation = LastOperation.PLusPercent;
         }
 
-        public void Clear()
+        private void Clear()
         {
-            model.Number = 0;
-            UpdateNumber = 0;
+            Output = "0";
         }
 
-        public void ClearAll()
+        private void ClearAll()
         {
-            model.Number = 0;
-            UpdateNumber = 0;
-            tempNumber = 0;
-            newEntry = false;
+            Output = "0";
+            tempNumber = "0";
             lastoperation = LastOperation.None;
         }
 
-        public void Equal()
+        private void Equal()
         {
             switch (lastoperation)
             {
@@ -187,168 +200,170 @@ namespace FulcrumCalc.ViewModels
         }
         #endregion
 
+        
+
         #region Switchers
 
-                public void OperationSwitcher(string op, CalcViewModel cvm)
-                {
-                    switch(op)
-                    {
-                        case "+":
-                            cvm.Add();
-                            break;
-                        case "-":
-                            cvm.Subtract();
-                            break;
-                        case "*":
-                            cvm.Multiply();
-                            break;
-                        case "/":
-                            cvm.Divide();
-                            break;
-                        case "√":
-                            cvm.Sqrt();
-                            break;
-                        case "±":
-                            cvm.Opposite();
-                            break;
-                        case "1/x":
-                            cvm.Inverse();
-                            break;
-                        case "%":
-                            cvm.PlusPercent();
-                            break;
-                        case "CE":
-                            cvm.Clear();
-                            break;
-                        case "C":
-                            cvm.ClearAll();
-                            break;
-                        case "=":
-                            cvm.Equal();
-                            break;
-                        case "←":
-                            cvm.Back();
-                            break;
-                    }
-                }
+        public void OperationSwitcher(string op, CalcViewModel cvm)
+        {
+            switch (op)
+            {
+                case "+":
+                    cvm.Add();
+                    break;
+                case "-":
+                    cvm.Subtract();
+                    break;
+                case "*":
+                    cvm.Multiply();
+                    break;
+                case "/":
+                    cvm.Divide();
+                    break;
+                case "√":
+                    cvm.Sqrt();
+                    break;
+                case "±":
+                    cvm.Opposite();
+                    break;
+                case "1/x":
+                    cvm.Inverse();
+                    break;
+                case "%":
+                    cvm.PlusPercent();
+                    break;
+                case "CE":
+                    cvm.Clear();
+                    break;
+                case "C":
+                    cvm.ClearAll();
+                    break;
+                case "=":
+                    cvm.Equal();
+                    break;
+                case "←":
+                    cvm.Back();
+                    break;
+            }
+        }
 
-                public void KeyBoardSwitcher(string key, CalcViewModel cvm)
-                {
-                    var local = InputLanguageManager.Current;//ru-Ru
-                    switch (key)
-                    {
-                        case "D0":
-                            UpdateNumber = 0;
-                            break;
-                        case "NumPad0":
-                            UpdateNumber = 0;
-                            break;
-                        case "D1":
-                            UpdateNumber = 1;
-                            break;
-                        case "NumPad1":
-                            UpdateNumber = 1;
-                            break;
-                        case "D2":
-                            UpdateNumber = 2;
-                            break;
-                        case "NumPad2":
-                            UpdateNumber = 2;
-                            break;
-                        case "D3":
-                            UpdateNumber = 3;
-                            break;
-                        case "NumPad3":
-                            UpdateNumber = 3;
-                            break;
-                        case "D4":
-                            UpdateNumber = 4;
-                            break;
-                        case "NumPad4":
-                            UpdateNumber = 4;
-                            break;
-                        case "D5":
-                            UpdateNumber = 5;
-                            break;
-                        case "NumPad5":
-                            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                                cvm.PlusPercent();
-                            else
-                                UpdateNumber = 5;
-                            break;
-                        case "D6":
-                            UpdateNumber = 6;
-                            break;
-                        case "NumPad6":
-                            UpdateNumber = 6;
-                            break;
-                        case "D7":
-                            UpdateNumber = 7;
-                            break;
-                        case "NumPad7":
-                            UpdateNumber = 7;
-                            break;
-                        case "D8":
-                            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                                cvm.Multiply();
-                            else
-                                UpdateNumber = 8;
-                            break;
-                        case "NumPad8":
-                            UpdateNumber = 8;
-                            break;
-                        case "D9":
-                            UpdateNumber = 9;
-                            break;
-                        case "NumPad9":
-                            UpdateNumber = 9;
-                            break;
-                        case "Back":
-                            Back();
-                            break;
-                        case "Add":
-                            Add();
-                            break;
-                        case "OemPlus":
-                            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                                cvm.Add();
-                            else
-                                cvm.Equal();
-                            break;
-                        case "Multiply":
-                            Multiply();
-                            break;
-                        case "Divide":
-                            Divide();
-                            break;
-                        case "OemQuestion":
-                            if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                                //Comma_Click(sender, e);
-                                break;
-                            else
-                            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-                                cvm.Divide();
-                            break;
-                        case "Subtract":
-                            cvm.Subtract();
-                            break;
-                        case "OemMinus":
-                            if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
-                                cvm.Subtract();
-                            break;
-                        case "Decimal":
-                           // Comma_Click(sender, e);
-                            break;
-                        case "OemComma":
-                            //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                                //Comma_Click(sender, e);
-                            break;
-                        case "OemPeriod":
-                            //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                                //Comma_Click(sender, e);
-                            break;
-                    }
-                }
+        public void KeyBoardSwitcher(string key, CalcViewModel cvm)
+        {
+            var local = InputLanguageManager.Current;//ru-Ru
+            switch (key)
+            {
+                case "D0":
+                    TxtUpdate("0");
+                    break;
+                case "NumPad0":
+                    TxtUpdate("0");
+                    break;
+                case "D1":
+                    TxtUpdate("1");
+                    break;
+                case "NumPad1":
+                    TxtUpdate("1");
+                    break;
+                case "D2":
+                    TxtUpdate("2");
+                    break;
+                case "NumPad2":
+                    TxtUpdate("2");
+                    break;
+                case "D3":
+                    TxtUpdate("3");
+                    break;
+                case "NumPad3":
+                    TxtUpdate("3");
+                    break;
+                case "D4":
+                    TxtUpdate("4");
+                    break;
+                case "NumPad4":
+                    TxtUpdate("4");
+                    break;
+                case "D5":
+                    TxtUpdate("5");
+                    break;
+                case "NumPad5":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        cvm.PlusPercent();
+                    else
+                        TxtUpdate("5");
+                    break;
+                case "D6":
+                    TxtUpdate("6");
+                    break;
+                case "NumPad6":
+                    TxtUpdate("6");
+                    break;
+                case "D7":
+                    TxtUpdate("7");
+                    break;
+                case "NumPad7":
+                    TxtUpdate("7");
+                    break;
+                case "D8":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        cvm.Multiply();
+                    else
+                        TxtUpdate("8");
+                    break;
+                case "NumPad8":
+                    TxtUpdate("8");
+                    break;
+                case "D9":
+                    TxtUpdate("9");
+                    break;
+                case "NumPad9":
+                    TxtUpdate("9");
+                    break;
+                case "Back":
+                    Back();
+                    break;
+                case "Add":
+                    Add();
+                    break;
+                case "OemPlus":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        cvm.Add();
+                    else
+                        cvm.Equal();
+                    break;
+                case "Multiply":
+                    Multiply();
+                    break;
+                case "Divide":
+                    Divide();
+                    break;
+                case "OemQuestion":
+                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        //Comma_Click(sender, e);
+                        break;
+                    else
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        cvm.Divide();
+                    break;
+                case "Subtract":
+                    cvm.Subtract();
+                    break;
+                case "OemMinus":
+                    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                        cvm.Subtract();
+                    break;
+                case "Decimal":
+                    // Comma_Click(sender, e);
+                    break;
+                case "OemComma":
+                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    //Comma_Click(sender, e);
+                    break;
+                case "OemPeriod":
+                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    //Comma_Click(sender, e);
+                    break;
+            }
+        }
 
         #endregion
 
@@ -363,6 +378,8 @@ namespace FulcrumCalc.ViewModels
         private double StringToDouble(string val)
         {
             double res = 0;
+            if (val.Length == 0)
+                return res;
             if (val[val.Length - 1] == '.')
                 res = Convert.ToDouble(val.Remove(val.Length - 1));
             else

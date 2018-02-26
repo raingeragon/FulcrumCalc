@@ -44,7 +44,7 @@
         <TextBox x:Name="InputField"
                  Grid.Column="0" Grid.Row="0"
                  Grid.ColumnSpan="5" Grid.RowSpan="2"
-                 Text="{Binding UpdateNumber}"
+                 Text="{Binding Output}"
                  BorderThickness="5"
                  IsReadOnly="True"
                  Margin="5 30 5 5 " FlowDirection="LeftToRight"
@@ -77,7 +77,7 @@
         <Button x:Name="Equal" Content="=" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Click="Operation_Click" Style="{DynamicResource ButtonStyle}"/>
 
         <Button x:Name="Btn0" Content="0" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="NumBtn_Click" Style="{DynamicResource ButtonStyle}"/>
-        <Button x:Name="Comma" Content="," Grid.Column="2" Grid.Row="6" Click="Comma_Click" Style="{DynamicResource ButtonStyle}"/>
+        <Button x:Name="Comma" Content="." Grid.Column="2" Grid.Row="6" Click="NumBtn_Click" Style="{DynamicResource ButtonStyle}"/>
         <Button x:Name="Add" Content="+" Grid.Column="3" Grid.Row="6" Click="Operation_Click" Style="{DynamicResource ButtonStyle}"/>
     </Grid>
 </Window>

@@ -36,7 +36,7 @@ namespace FulcrumCalc
         private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
             var num = (Button)sender;
-            cvm.UpdateNumber = double.Parse(num.Content.ToString());
+            cvm.TxtUpdate(num.Content.ToString());
         }
 
         private void Operation_Click(object sender, RoutedEventArgs e)
@@ -48,11 +48,6 @@ namespace FulcrumCalc
         private void Input_KeyDown(object sender, KeyEventArgs e)
         {
             cvm.KeyBoardSwitcher(e.Key.ToString(), cvm);
-        }
-
-        private void Comma_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         private void Theme_Checked(object sender, RoutedEventArgs e)
