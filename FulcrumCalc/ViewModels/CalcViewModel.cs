@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using FulcrumCalc.Models;
 using System;
+using System.Windows.Input;
 
 namespace FulcrumCalc.ViewModels
 {
@@ -181,6 +182,164 @@ namespace FulcrumCalc.ViewModels
             lastoperation = LastOperation.None;
         }
 
+        public void OperationSwitcher(string op)
+        {
+            switch(op)
+            {
+                case "Add":
+                    Add();
+                    break;
+                case "Subtract":
+                    Subtract();
+                    break;
+                case "Divide":
+                    Divide();
+                    break;
+                case "Sqrt":
+                    Sqrt();
+                    break;
+                case "Opposite":
+                    Opposite();
+                    break;
+                case "Inverse":
+                    Inverse();
+                    break;
+                case "PlusPercent":
+                    PlusPercent();
+                    break;
+                case "Clear":
+                    Clear();
+                    break;
+                case "ClearAll":
+                    ClearAll();
+                    break;
+                case "Equal":
+                    Equal();
+                    break;
+                case "Back":
+                    Back();
+                    break;
+            }
+        }
+
+        public void KeyBoardSwitcher(string key)
+        {
+            var local = InputLanguageManager.Current;//ru-Ru
+            switch (key)
+            {
+                case "D0":
+                    UpdateNumber = 0;
+                    break;
+                case "NumPad0":
+                    UpdateNumber = 0;
+                    break;
+                case "D1":
+                    UpdateNumber = 1;
+                    break;
+                case "NumPad1":
+                    UpdateNumber = 1;
+                    break;
+                case "D2":
+                    UpdateNumber = 2;
+                    break;
+                case "NumPad2":
+                    UpdateNumber = 2;
+                    break;
+                case "D3":
+                    UpdateNumber = 3;
+                    break;
+                case "NumPad3":
+                    UpdateNumber = 3;
+                    break;
+                case "D4":
+                    UpdateNumber = 4;
+                    break;
+                case "NumPad4":
+                    UpdateNumber = 4;
+                    break;
+                case "D5":
+                    UpdateNumber = 5;
+                    break;
+                case "NumPad5":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        PlusPercent();
+                    else
+                        UpdateNumber = 5;
+                    break;
+                case "D6":
+                    UpdateNumber = 6;
+                    break;
+                case "NumPad6":
+                    UpdateNumber = 6;
+                    break;
+                case "D7":
+                    UpdateNumber = 7;
+                    break;
+                case "NumPad7":
+                    UpdateNumber = 7;
+                    break;
+                case "D8":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        Multiply();
+                    else
+                        UpdateNumber = 8;
+                    break;
+                case "NumPad8":
+                    UpdateNumber = 8;
+                    break;
+                case "D9":
+                    UpdateNumber = 9;
+                    break;
+                case "NumPad9":
+                    UpdateNumber = 9;
+                    break;
+                case "Back":
+                    Back();
+                    break;
+                case "Add":
+                    Add();
+                    break;
+                case "OemPlus":
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        Add();
+                    else
+                        Equal();
+                    break;
+                case "Multiply":
+                    Multiply();
+                    break;
+                case "Divide":
+                    Divide();
+                    break;
+                case "OemQuestion":
+                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        //Comma_Click(sender, e);
+                        break;
+                    else
+                    if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                        Divide();
+                    break;
+                case "Subtract":
+                    Subtract();
+                    break;
+                case "OemMinus":
+                    if (!(Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)))
+                        Subtract();
+                    break;
+                case "Decimal":
+                   // Comma_Click(sender, e);
+                    break;
+                case "OemComma":
+                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        //Comma_Click(sender, e);
+                    break;
+                case "OemPeriod":
+                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        //Comma_Click(sender, e);
+                    break;
+            }
+        }
+    
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -189,6 +348,7 @@ namespace FulcrumCalc.ViewModels
             // take a copy to prevent thread issues
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
         private double StringToDouble(string val)
         {
             double res = 0;
@@ -199,6 +359,7 @@ namespace FulcrumCalc.ViewModels
             return res;
             
         }
+
         enum LastOperation
         {
             None,
