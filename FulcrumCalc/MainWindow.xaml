@@ -11,12 +11,6 @@
         <vm:CalcViewModel/>
     </Window.DataContext>
     
-    <!--<StackPanel x:Name="MyStackPanel">
-        <CheckBox Content="Theme" Checked="Theme_Checked" Unchecked="Theme_Unchecked"/>
-        <Border x:Name="NiceSquareContainer" Margin="30">
-            <local:NiceSquare/>
-        </Border>
-    </StackPanel>-->
     <Grid ShowGridLines="False" x:Name="CalcBox">
         
         <Grid.RowDefinitions>
@@ -36,11 +30,12 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <CheckBox Grid.Column="3" Grid.Row="0"
+        <CheckBox Grid.Column="0" Grid.Row="0"
                   Grid.ColumnSpan="2" 
                   Content="Dark Theme"
                   FontSize="20"
-                  HorizontalAlignment="Right"
+                  Margin="6 10 0 0"
+                  Padding="0 -8 0 0"
                   Unchecked="Theme_Unchecked"
                   Checked="Theme_Checked"
                   
@@ -79,7 +74,7 @@
         <Button x:Name="Btn2" Content="2" Grid.Column="1" Grid.Row="5" Click="NumBtn_Click" Style="{DynamicResource ButtonStyle}"/>
         <Button x:Name="Btn3" Content="3" Grid.Column="2" Grid.Row="5" Click="NumBtn_Click" Style="{DynamicResource ButtonStyle}"/>
         <Button x:Name="Minus" Content="-" Grid.Column="3" Grid.Row="5" Click="Operation_Click" Style="{DynamicResource ButtonStyle}"/>
-        <Button x:Name="Equal" Content="=" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Click="Operation_Click" IsDefault="True" Style="{DynamicResource ButtonStyle}"/>
+        <Button x:Name="Equal" Content="=" Grid.Column="4" Grid.Row="5" Grid.RowSpan="2" Click="Operation_Click" Style="{DynamicResource ButtonStyle}"/>
 
         <Button x:Name="Btn0" Content="0" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="NumBtn_Click" Style="{DynamicResource ButtonStyle}"/>
         <Button x:Name="Comma" Content="," Grid.Column="2" Grid.Row="6" Click="Comma_Click" Style="{DynamicResource ButtonStyle}"/>

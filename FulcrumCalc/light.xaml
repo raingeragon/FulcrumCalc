@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:FulcrumCalc">
 
-    <Style x:Key="ButtonStyle" TargetType="Button">
+    <Style x:Key="ButtonStyle" TargetType="Button" >
         <Setter Property="Margin" Value="3"/>
-        <Setter Property="Background" Value="White" />
-        <Setter Property="Foreground" Value="Gray" />
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="#dddddd" />
+        <Setter Property="Foreground" Value="Black" />
         <Setter Property="BorderBrush" Value="Gray" />
     </Style>
 </ResourceDictionary>

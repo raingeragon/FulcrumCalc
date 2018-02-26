@@ -25,6 +25,12 @@ namespace FulcrumCalc
             InitializeComponent();
 
             cvm = (CalcViewModel)DataContext;
+
+            
+            var uri = new Uri("light.xaml", UriKind.Relative);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
