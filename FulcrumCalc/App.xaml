@@ -4,19 +4,6 @@
              xmlns:local="clr-namespace:FulcrumCalc"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <local:SkinResourceDictionary DarkSource="pack://application:,,,/Themes/Dark/DarkColors.xaml" 
-                                              LightSource="pack://application:,,,/Themes/Light/LightColors.xaml" />
-                <local:SkinResourceDictionary DarkSource="pack://application:,,,/Themes/Dark/DarkSizes.xaml" 
-                                              LightSource="pack://application:,,,/Themes/Light/LightSizes.xaml" />
-                <ResourceDictionary Source="ThemeStyle.xaml"/>
-                
-            </ResourceDictionary.MergedDictionaries>
-            <Style x:Name="BtnStyle" TargetType="Button">
-                <Setter Property="Margin" Value="3"/>
-            </Style>
-        </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

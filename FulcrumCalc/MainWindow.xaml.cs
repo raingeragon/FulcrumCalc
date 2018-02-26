@@ -23,8 +23,8 @@ namespace FulcrumCalc
         public MainWindow()
         {
             InitializeComponent();
-            cvm = (CalcViewModel)DataContext;
 
+            cvm = (CalcViewModel)DataContext;
         }
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
@@ -51,19 +51,26 @@ namespace FulcrumCalc
 
         private void Theme_Checked(object sender, RoutedEventArgs e)
         {
-            (App.Current as App).ChangeSkin(Skin.Dark);
-            RefreshNiceSquare();
+            // определяем путь к файлу ресурсов
+            var uri = new Uri("dark.xaml", UriKind.Relative);
+            // загружаем словарь ресурсов
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            // очищаем коллекцию ресурсов приложения
+            Application.Current.Resources.Clear();
+            // добавляем загруженный словарь ресурсов
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
 
         private void Theme_Unchecked(object sender, RoutedEventArgs e)
         {
-            (App.Current as App).ChangeSkin(Skin.Light);
-            RefreshNiceSquare();
+            // определяем путь к файлу ресурсов
+            var uri = new Uri("light.xaml", UriKind.Relative);
+            // загружаем словарь ресурсов
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            // очищаем коллекцию ресурсов приложения
+            Application.Current.Resources.Clear();
+            // добавляем загруженный словарь ресурсов
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
-
-        private void RefreshNiceSquare()
-        {
-            //NiceSquareContainer.Child = new NiceSquare();
-        }   
     }
 }
