@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel;
 using FulcrumCalc.Models;
+using System;
+
 namespace FulcrumCalc.ViewModels
 {
     class CalcViewModel : INotifyPropertyChanged
@@ -181,12 +183,32 @@ namespace FulcrumCalc.ViewModels
 
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         private void RaisePropertyChanged(string propertyName)
         {
             // take a copy to prevent thread issues
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        private double StringToDouble(string val)
+        {
+            double res = 0;
+            try
+            {
+                 res = Convert.ToDouble(val);
+            }
+            catch (FormatException)
+            {
+                try
+                {
+                    res = Convert.ToDouble(val.Remove(val.Length - 1));
+                }
+                catch(OverflowException)
+                { }
+            }
+            
+            return res;
+            
+        }
         enum LastOperation
         {
             None,

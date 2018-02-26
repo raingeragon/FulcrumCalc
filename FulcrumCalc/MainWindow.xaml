@@ -10,6 +10,7 @@
     <Window.DataContext>
         <vm:CalcViewModel/>
     </Window.DataContext>
+    
     <!--<StackPanel x:Name="MyStackPanel">
         <CheckBox Content="Theme" Checked="Theme_Checked" Unchecked="Theme_Unchecked"/>
         <Border x:Name="NiceSquareContainer" Margin="30">

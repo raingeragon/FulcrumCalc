@@ -11,7 +11,12 @@
                 <local:SkinResourceDictionary DarkSource="pack://application:,,,/Themes/Dark/DarkSizes.xaml" 
                                               LightSource="pack://application:,,,/Themes/Light/LightSizes.xaml" />
                 <ResourceDictionary Source="ThemeStyle.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
+            <Style x:Name="BtnStyle" TargetType="Button">
+                <Setter Property="Margin" Value="3"/>
+            </Style>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
