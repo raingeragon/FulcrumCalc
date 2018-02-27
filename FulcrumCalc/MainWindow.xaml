@@ -28,48 +28,57 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Menu Height="20" VerticalAlignment="Top" Grid.ColumnSpan="5">
-            <MenuItem Header="Themes">
-                <MenuItem Header="Light" Click="Light_Click"/>
-                <MenuItem Header="Dark" Click="Dark_Click"/>
-            </MenuItem>
-        </Menu>
-
-        <Border Grid.Column="0" Grid.Row="0"
-                 Grid.ColumnSpan="5" Grid.RowSpan="2"
-               BorderThickness="5"
-                Margin="5 20 5 5"
-                BorderBrush="Gray"
-                 >
-            <DockPanel>
-                <TextBlock x:Name="MathString"
-                       DockPanel.Dock="Top"
-                       
-                       Text="{Binding MathString}"
-                       Margin="3"
-                       />
-                <TextBox x:Name="InputField"
-                     DockPanel.Dock="Bottom"
-                     IsReadOnly="True"
-                     BorderThickness="0"
-                     TextWrapping="NoWrap"
-                     
-                     Text="{Binding Output}"
-                     Margin="0" FlowDirection="LeftToRight"
-                     FontWeight="SemiBold" FontSize="50"
-                     Padding="0 -5 0 0 " VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
-                </TextBox>
-            </DockPanel>
-
-        </Border>
+        <Grid Grid.ColumnSpan="5" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5.5*"/>
+            </Grid.RowDefinitions>
+            <Viewbox HorizontalAlignment="Left">
+                <Menu VerticalAlignment="Top">
+                    <MenuItem Header="Themes">
+                        <MenuItem Header="Light" Click="Light_Click"/>
+                        <MenuItem Header="Dark" Click="Dark_Click"/>
+                    </MenuItem>
+                </Menu>
+            </Viewbox>
+            <Border Grid.Row="1" Grid.RowSpan="2"
+                    BorderThickness="5"
+                    Margin="5 0 5 5"
+                    BorderBrush="Gray">
+                <DockPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <Viewbox DockPanel.Dock="Top" Grid.Row="0" HorizontalAlignment="Left">
+                            <TextBlock x:Name="MathString"
+                                       Text="{Binding MathString}"
+                                       Margin="3"/>
+                        </Viewbox>
+                        <Viewbox DockPanel.Dock="Bottom" HorizontalAlignment="Left" Grid.Row="1">
+                            <TextBox x:Name="InputField"
+                                     IsReadOnly="True"
+                                     BorderThickness="0"
+                                     TextWrapping="NoWrap"
+                                     Text="{Binding Output}"
+                                     Margin="0" FlowDirection="LeftToRight"
+                                     FontWeight="SemiBold" FontSize="50"
+                                     Padding="0 -5 0 0 "
+                                     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            </TextBox>
+                        </Viewbox>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </Grid>
         <Button x:Name="Back" Grid.Column="0" Grid.Row="2" Click="Operation_Click" Style="{DynamicResource ButtonStyle}">
             <Button.Content>
                 <Viewbox >
                     <TextBlock>←</TextBlock>
                 </Viewbox>
             </Button.Content>
-            
+
         </Button>
         <Button x:Name="Clear" Grid.Column="1" Grid.Row="2"  Click="Operation_Click" Style="{DynamicResource ButtonStyle}">
             <Button.Content>
