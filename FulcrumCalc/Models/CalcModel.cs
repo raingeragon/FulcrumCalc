@@ -22,7 +22,7 @@ namespace FulcrumCalc.Models
 
         public double Opposite(double x) => -x;
 
-        public double PlusPercent(double x, double y) => x + x * y / 100.0;
+        public double Percent(double x) => x / 100.0;
 
         public string Back(string x)
         {

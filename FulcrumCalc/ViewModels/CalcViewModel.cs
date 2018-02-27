@@ -7,10 +7,10 @@ namespace FulcrumCalc.ViewModels
 {
     class CalcViewModel : INotifyPropertyChanged
     {
-        private string tempNumber;
         private CalcModel model;
-        LastOperation lastoperation;
+        private string mathstring;
         private string output;
+        private bool newEntry;
         public string Output
         {
             get
@@ -23,14 +23,24 @@ namespace FulcrumCalc.ViewModels
                 RaisePropertyChanged("Output");
             }
         }
-            
+        public string MathString
+        {
+            get
+            {
+                return mathstring;
+            }
+            set
+            {
+                mathstring = value;
+                RaisePropertyChanged("MathString");
+            }
+        }
 
         public CalcViewModel()
         {
             model = new CalcModel();
-            tempNumber = "0";
+            MathString = "";
             Output = "0";
-            lastoperation = LastOperation.None;
         }
 
         public void TxtUpdate(string input)
@@ -41,10 +51,11 @@ namespace FulcrumCalc.ViewModels
                     Output += input;
             }
             else
-                if (Output == "0")
+                if (Output == "0" || newEntry)
                 Output = input;
             else
                 Output += input;
+            newEntry = false;
             
         }
 
@@ -60,71 +71,34 @@ namespace FulcrumCalc.ViewModels
 
         private void Add()
         {
-            if (lastoperation == LastOperation.Add)
-            {
-                double res = model.Add(StringToDouble(tempNumber), StringToDouble(Output));
-                Clear();
-                TxtUpdate(res.ToString());
-            }
-            tempNumber = Output;
-            if (lastoperation == LastOperation.None)
-                Output = "";
-            lastoperation = LastOperation.Add;
+            MathString += Output + " + ";
+            newEntry = true;
         }
 
         private void Subtract()
         {
-            if (lastoperation == LastOperation.Subtract)
-            {
-                double res = model.Subtract(StringToDouble(tempNumber), StringToDouble(Output));
-                Clear();
-                TxtUpdate(res.ToString());
-            }
-            tempNumber = Output;
-            if (lastoperation == LastOperation.None)
-                Output = "";
-            lastoperation = LastOperation.Subtract;
+            MathString += Output + " - ";
+            newEntry = true;
         }
 
         private void Multiply()
         {
-            if (lastoperation == LastOperation.Multiply)
-            {
-                double res = model.Multiply(StringToDouble(tempNumber), StringToDouble(Output));
-                Clear();
-                TxtUpdate(res.ToString());
-            }
-            tempNumber = Output;
-            if (lastoperation == LastOperation.None)
-                Output = "";
-            lastoperation = LastOperation.Multiply;
+            MathString += Output + " * ";
+            newEntry = true;
         }
 
         private void Divide()
         {
-            if (lastoperation == LastOperation.Divide)
-            {
-                double res = model.Divide(StringToDouble(tempNumber), StringToDouble(Output));
-                Clear();
-                TxtUpdate(res.ToString());
-            }
-            tempNumber = Output;
-            if (lastoperation == LastOperation.None)
-                Output = "";
-            lastoperation = LastOperation.Divide;
+            MathString += Output + " / ";
+            newEntry = true;
         }
 
         private void Sqrt()
         {
-            if (StringToDouble(Output) >= 0)
-            {
                 double res = model.Sqrt(StringToDouble(Output));
                 Clear();
                 TxtUpdate(res.ToString());
-                tempNumber = Output;
-            }
-                lastoperation = LastOperation.None;
-            
+            newEntry = true;
         }
 
         private void Opposite()
@@ -132,8 +106,7 @@ namespace FulcrumCalc.ViewModels
             double res = model.Opposite(StringToDouble(Output));
             Clear();
             TxtUpdate(res.ToString());
-            tempNumber = Output;
-            lastoperation = LastOperation.None;
+            newEntry = true;
         }
 
         private void Inverse()
@@ -141,22 +114,16 @@ namespace FulcrumCalc.ViewModels
             double res = model.Inverse(StringToDouble(Output));
             Clear();
             TxtUpdate(res.ToString());
-            tempNumber = Output;
-            lastoperation = LastOperation.None;
+            newEntry = true;
         }
 
         private void PlusPercent()
         {
-            if (lastoperation == LastOperation.PLusPercent)
-            {
-                double res = model.PlusPercent(StringToDouble(tempNumber), StringToDouble(Output));
-                Clear();
-                TxtUpdate(res.ToString());
-            }
-            tempNumber = Output;
-            if (lastoperation == LastOperation.None)
-                Output = "";
-            lastoperation = LastOperation.PLusPercent;
+            double res = model.Percent(StringToDouble(Output));
+            Clear();
+            TxtUpdate(res.ToString());
+            newEntry = true;
+
         }
 
         private void Clear()
@@ -167,36 +134,65 @@ namespace FulcrumCalc.ViewModels
         private void ClearAll()
         {
             Output = "0";
-            tempNumber = "0";
-            lastoperation = LastOperation.None;
+            MathString = "";
         }
 
         private void Equal()
         {
-            switch (lastoperation)
+            MathString += Output;
+            Clear();
+            // parses string that contains multi operations and returns the result on the screen
+            var ops = MathString.Split(' ');
+            int i = 1;
+            double res = 0;
+            double tempRes;
+            string op;
+            
+            if (Convert.ToDouble(ops[0]) < 0)
+                op = "-";
+            else
+                op = "";
+
+            tempRes = Convert.ToDouble(ops[0]);
+            while (i <= ops.Length)
             {
-                case LastOperation.Add:
-                    Add();
+                if (i == ops.Length)
+                {
+                    res += Convert.ToDouble(op + tempRes.ToString());
                     break;
-                case LastOperation.Divide:
-                    Divide();
-                    break;
-                case LastOperation.Inverse:
-                    Inverse();
-                    break;
-                case LastOperation.Multiply:
-                    Multiply();
-                    break;
-                case LastOperation.PLusPercent:
-                    PlusPercent();
-                    break;
-                case LastOperation.Subtract:
-                    Subtract();
-                    break;
-                default:
-                    break;
+                }
+                if (ops[i] == "/" || ops[i] == "*")
+                {
+                    while (i < ops.Length && (ops[i] == "/" || ops[i] == "*"))
+                    {
+                        if (ops[i] == "/")
+                            tempRes = tempRes / Convert.ToDouble(ops[i + 1]);
+                        else
+                            tempRes = tempRes * Convert.ToDouble(ops[i + 1]);
+                        i += 2;
+                    }
+
+                }
+                if (i <= ops.Length)
+                {
+
+                    res += Convert.ToDouble(op + tempRes.ToString());
+                    if (i + 1 < ops.Length)
+                    {
+                        if (ops[i] == "+")
+                            op = "";
+                        else
+                            op = "-";
+                        if (i != ops.Length)
+                            tempRes = Convert.ToDouble(ops[i + 1]);
+                        i += 2;
+                    }
+                }
+
             }
-            lastoperation = LastOperation.None;
+            MathString = "";
+            Output = res.ToString();
+            newEntry = true;
         }
         #endregion
 
@@ -360,6 +356,9 @@ namespace FulcrumCalc.ViewModels
                 case "OemPeriod":
                     if (local.CurrentInputLanguage.ToString() != "ru-RU")
                     TxtUpdate(".");
+                    break;
+                case "Return":
+                    cvm.Equal();
                     break;
             }
         }
