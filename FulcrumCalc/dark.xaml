@@ -3,8 +3,9 @@
                     xmlns:local="clr-namespace:FulcrumCalc">
     <Style x:Key="ButtonStyle" TargetType="Button">
         <Setter Property="Margin" Value="3"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Background" Value="Gray" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="BorderBrush" Value="White" />

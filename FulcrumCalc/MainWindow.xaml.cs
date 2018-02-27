@@ -35,14 +35,15 @@ namespace FulcrumCalc
 
         private void NumBtn_Click(object sender, RoutedEventArgs e)
         {
-            var num = (Button)sender;
-            cvm.TxtUpdate(num.Content.ToString());
+            var num = (((sender as Button).Content as Viewbox).Child as TextBlock).Text;
+            cvm.TxtUpdate(num);
         }
 
         private void Operation_Click(object sender, RoutedEventArgs e)
         {
-            var op = (Button)sender;
-            cvm.OperationSwitcher(op.Content.ToString(), cvm);
+            
+            var op = (((sender as Button).Content as Viewbox).Child as TextBlock).Text;
+            cvm.OperationSwitcher(op, cvm);
         }
 
         private void Input_KeyDown(object sender, KeyEventArgs e)
