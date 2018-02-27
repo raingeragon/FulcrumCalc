@@ -51,7 +51,7 @@ namespace FulcrumCalc
             cvm.KeyBoardSwitcher(e.Key.ToString(), cvm);
         }
 
-        private void Theme_Checked(object sender, RoutedEventArgs e)
+        private void Dark_Click(object sender, RoutedEventArgs e)
         {
             // определяем путь к файлу ресурсов
             var uri = new Uri("dark.xaml", UriKind.Relative);
@@ -63,7 +63,7 @@ namespace FulcrumCalc
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
 
-        private void Theme_Unchecked(object sender, RoutedEventArgs e)
+        private void Light_Click(object sender, RoutedEventArgs e)
         {
             // определяем путь к файлу ресурсов
             var uri = new Uri("light.xaml", UriKind.Relative);
