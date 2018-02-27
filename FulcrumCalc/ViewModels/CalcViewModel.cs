@@ -338,8 +338,7 @@ namespace FulcrumCalc.ViewModels
                     break;
                 case "OemQuestion":
                     if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                        //Comma_Click(sender, e);
-                        break;
+                        TxtUpdate(".");
                     else
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
                         cvm.Divide();
@@ -352,15 +351,15 @@ namespace FulcrumCalc.ViewModels
                         cvm.Subtract();
                     break;
                 case "Decimal":
-                    // Comma_Click(sender, e);
+                    TxtUpdate(".");
                     break;
                 case "OemComma":
-                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                    //Comma_Click(sender, e);
+                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                        TxtUpdate(".");
                     break;
                 case "OemPeriod":
-                    //if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
-                    //Comma_Click(sender, e);
+                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    TxtUpdate(".");
                     break;
             }
         }
