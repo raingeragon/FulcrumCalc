@@ -249,7 +249,7 @@ namespace FulcrumCalc.ViewModels
 
         public void KeyBoardSwitcher(string key, CalcViewModel cvm)
         {
-            var local = InputLanguageManager.Current;//ru-Ru
+            var local = InputLanguageManager.Current;//ru-RU
             switch (key)
             {
                 case "D0":
@@ -319,7 +319,7 @@ namespace FulcrumCalc.ViewModels
                     TxtUpdate("9");
                     break;
                 case "Back":
-                    Back();
+                    cvm.Back();
                     break;
                 case "Add":
                     Add();
