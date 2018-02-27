@@ -37,7 +37,7 @@ namespace FulcrumCalc.ViewModels
         {
             if (input == ".")
             {
-                if (!(Output == "0" || Output =="" || Output.Contains(".")))
+                if (!(Output == "0" || Output == "" || Output.Contains(".")))
                     Output += input;
             }
             else
@@ -337,7 +337,7 @@ namespace FulcrumCalc.ViewModels
                     Divide();
                     break;
                 case "OemQuestion":
-                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    if (local.CurrentInputLanguage.ToString() == "ru-RU")
                         TxtUpdate(".");
                     else
                     if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
@@ -354,11 +354,11 @@ namespace FulcrumCalc.ViewModels
                     TxtUpdate(".");
                     break;
                 case "OemComma":
-                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    if (local.CurrentInputLanguage.ToString() != "ru-RU")
                         TxtUpdate(".");
                     break;
                 case "OemPeriod":
-                    if (!(local.CurrentInputLanguage.ToString() != "ru-Ru"))
+                    if (local.CurrentInputLanguage.ToString() != "ru-RU")
                     TxtUpdate(".");
                     break;
             }
