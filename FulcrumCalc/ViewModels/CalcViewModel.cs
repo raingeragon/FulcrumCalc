@@ -385,18 +385,5 @@ namespace FulcrumCalc.ViewModels
             return res;
             
         }
-
-        enum LastOperation
-        {
-            None,
-            Add,
-            Divide,
-            Subtract,
-            Multiply,
-            Sqrt,
-            PLusPercent,
-            Inverse,
-            Opposite
-        };
     }
 }
