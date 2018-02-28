@@ -158,7 +158,6 @@ namespace FulcrumCalc.ViewModels
             {
                 if (i == ops.Length)
                 {
-                    res += Convert.ToDouble(op + tempRes.ToString());
                     break;
                 }
                 if (ops[i] == "/" || ops[i] == "*")
