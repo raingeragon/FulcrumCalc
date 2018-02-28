@@ -137,17 +137,33 @@ namespace FulcrumCalc.ViewModels
             MathString = "";
         }
 
+        // parses string that contains multi operations and returns the result on the screen
         private void Equal()
         {
             MathString += Output;
-            Clear();
-            // parses string that contains multi operations and returns the result on the screen
+            Clear(); 
             var ops = MathString.Split(' ');
             int i = 1;
             double res = 0;
             double tempRes;
             string op;
-            
+
+            //tempRes = Convert.ToDouble(ops[i]);
+            //while (i < ops.Length)
+            //{
+            //    if (op == "" || op == "-")
+            //    {
+            //        res += Convert.ToDouble(op + tempRes.ToString());
+            //        i += 2;
+
+            //    }
+            //    else
+            //    {
+
+            //    }
+
+            //}
+
             if (Convert.ToDouble(ops[0]) < 0)
                 op = "-";
             else
@@ -158,8 +174,13 @@ namespace FulcrumCalc.ViewModels
             {
                 if (i == ops.Length)
                 {
+                    if (ops[i-2] == "+" || ops[i-2] == "-")
+                    {
+                        res += Convert.ToDouble(op + tempRes.ToString());
+                    }
                     break;
                 }
+
                 if (ops[i] == "/" || ops[i] == "*")
                 {
                     while (i < ops.Length && (ops[i] == "/" || ops[i] == "*"))
@@ -172,6 +193,7 @@ namespace FulcrumCalc.ViewModels
                     }
 
                 }
+
                 if (i <= ops.Length)
                 {
 
