@@ -148,22 +148,6 @@ namespace FulcrumCalc.ViewModels
             double tempRes;
             string op;
 
-            //tempRes = Convert.ToDouble(ops[i]);
-            //while (i < ops.Length)
-            //{
-            //    if (op == "" || op == "-")
-            //    {
-            //        res += Convert.ToDouble(op + tempRes.ToString());
-            //        i += 2;
-
-            //    }
-            //    else
-            //    {
-
-            //    }
-
-            //}
-
             if (Convert.ToDouble(ops[0]) < 0)
                 op = "-";
             else
